@@ -256,6 +256,7 @@ function renderRoom() {
   els.room.innerHTML = `
     <div class="room-head">
       <input type="text" data-field="name" class="room-name" placeholder="Название комнаты">
+      <button type="button" class="link" data-act="copy">Копировать</button>
       ${state.rooms.length > 1 ? '<button type="button" class="link danger" data-act="remove">Удалить</button>' : ''}
     </div>
     <div class="dims">
@@ -339,6 +340,15 @@ function renderRoom() {
       if (!confirm(`Удалить «${room.name}» вместе с работами?`)) return;
       state.rooms = state.rooms.filter((r) => r.id !== room.id);
       state.current = state.rooms[0].id;
+      save();
+      renderAll();
+      return;
+    }
+    if (act === 'copy') {
+      // Похожая комната — размеры, проёмы и отмеченные работы те же, правится только отличие
+      const copy = { ...JSON.parse(JSON.stringify(room)), id: newRoom('').id, name: `${room.name} (копия)` };
+      state.rooms.splice(state.rooms.indexOf(room) + 1, 0, copy);
+      state.current = copy.id;
       save();
       renderAll();
       return;

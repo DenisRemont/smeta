@@ -1,6 +1,6 @@
 // Оболочку приложения держим в кэше, чтобы открывалось без связи.
 // Прайс сюда не попадает: его app.js сам кэширует в localStorage.
-const CACHE = 'smeta-v12';
+const CACHE = 'smeta-v13';
 const SHELL = [
   './', 'index.html', 'style.css', 'app.js', 'config.js', 'manifest.webmanifest',
   'icon.svg', 'icon-192.png', 'logo.jpg', 'vendor/pdfmake.min.js', 'vendor/vfs_fonts.js',
